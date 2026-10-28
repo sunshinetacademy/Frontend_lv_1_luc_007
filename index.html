@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="محاضرة استكمال HTML من Sunshine T Academy: Forms, Inputs, Select, Datalist, Entities, Code, Pre, BDI وWBR">
+  <title>محاضرة استكمال HTML | Sunshine T Academy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--sun:#ffc928;--sunlight:#fff4c7;--navy:#102a43;--blue:#1769aa;--cyan:#35b7d4;--cream:#fffdf5;--ink:#17202a;--muted:#637083;--line:#e7edf3;--white:#fff;--green:#147d52;--red:#b42318;--shadow:0 14px 38px rgba(16,42,67,.09);--radius:22px}
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;scroll-padding-top:90px}
+    body{font-family:"Cairo",sans-serif;background:var(--cream);color:var(--ink);line-height:1.9}
+    a{color:var(--blue);overflow-wrap:anywhere}
+    .container{width:min(1120px,92%);margin:auto}
+    header{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+    .nav{min-height:72px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand{display:flex;align-items:center;gap:11px;color:var(--navy);font-weight:800}
+    .logo{width:46px;height:46px;display:grid;place-items:center;border-radius:15px;background:linear-gradient(145deg,var(--sun),#ffe98a);font-size:24px;box-shadow:0 7px 18px #ffc92855}
+    .brand small{display:block;font-size:.72rem;color:var(--muted);font-weight:600}
+    nav{display:flex;gap:15px;flex-wrap:wrap;font-size:.84rem;font-weight:700}
+    nav a{text-decoration:none;color:#415266}
+    .hero{padding:58px 0 35px;display:grid;grid-template-columns:1.15fr .85fr;gap:35px;align-items:center}
+    .eyebrow{display:inline-block;background:var(--sunlight);color:#775900;border:1px solid #ffe58a;border-radius:99px;padding:5px 13px;font-weight:800;font-size:.85rem;margin-bottom:15px}
+    h1{font-size:clamp(2.1rem,5vw,3.7rem);line-height:1.25;color:var(--navy);margin-bottom:15px}
+    h1 span{color:var(--blue)}
+    .hero p{color:var(--muted);font-size:1.05rem}
+    .hero-card{background:var(--navy);color:#e8f0f7;border-radius:26px;padding:24px;box-shadow:var(--shadow);direction:ltr;text-align:left;overflow:hidden}
+    .dots{display:flex;gap:7px;margin-bottom:17px}.dots i{width:10px;height:10px;border-radius:50%;background:#ffc928}.dots i:nth-child(2){background:#35b7d4}.dots i:nth-child(3){background:#8bd5a7}
+    pre{direction:ltr;text-align:left;white-space:pre;overflow:auto;font: .86rem/1.8 "JetBrains Mono",monospace}
+    code,.inline-code{font-family:"JetBrains Mono",monospace;direction:ltr;unicode-bidi:isolate}
+    .hero-card pre{color:#dbeafe}.pink{color:#f9a8d4}.yellow{color:#fde68a}.cyan{color:#7dd3fc}.green{color:#86efac}
+    .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:14px auto 35px}
+    .stat{background:white;border:1px solid var(--line);border-radius:17px;padding:13px;text-align:center}
+    .stat strong{display:block;color:var(--navy);font-size:1.15rem}.stat span{font-size:.78rem;color:var(--muted)}
+    .layout{display:grid;grid-template-columns:250px minmax(0,1fr);gap:24px;align-items:start}
+    aside{position:sticky;top:90px;background:#fff;border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:var(--shadow)}
+    aside h3{color:var(--navy);margin-bottom:8px;font-size:1rem}
+    aside a{display:block;padding:6px 8px;text-decoration:none;border-radius:9px;font-size:.86rem;color:#415266}
+    aside a:hover{background:var(--sunlight);color:var(--navy)}
+    main{min-width:0}
+    section.lesson{background:white;border:1px solid var(--line);border-radius:var(--radius);padding:clamp(18px,3vw,30px);margin-bottom:22px;box-shadow:var(--shadow);scroll-margin-top:90px}
+    h2{color:var(--navy);font-size:1.55rem;line-height:1.45;margin-bottom:12px}
+    h3{color:var(--blue);font-size:1.12rem;margin:19px 0 8px}
+    p{margin:8px 0 12px}
+    ul,ol{padding-right:24px;margin:8px 0 14px}
+    li{margin:5px 0}
+    .note,.warning,.success{padding:13px 16px;border-radius:13px;margin:14px 0;border-right:4px solid var(--blue);background:#eef7ff}
+    .warning{border-color:#d97706;background:#fff7e8}
+    .success{border-color:var(--green);background:#eaf8f0}
+    .codebox{position:relative;background:#0c1824;border:1px solid #20364a;border-radius:15px;margin:12px 0 17px;overflow:hidden}
+    .codebox .label{display:flex;justify-content:space-between;gap:10px;align-items:center;background:#13283a;color:#b8c8d8;padding:8px 13px;font-size:.78rem}
+    .codebox pre{padding:17px;color:#e8f0f7;font-size:.83rem}
+    .copy{border:1px solid #53687a;background:#20364a;color:white;border-radius:8px;padding:4px 9px;font:inherit;cursor:pointer}
+    .table-wrap{overflow-x:auto;margin:12px 0}
+    table{border-collapse:collapse;width:100%;min-width:540px}
+    th,td{border:1px solid var(--line);padding:10px 12px;text-align:right;vertical-align:top}
+    th{background:#eef5fb;color:var(--navy)}
+    .pill{display:inline-block;background:var(--sunlight);color:#765800;border-radius:8px;padding:1px 7px;font-size:.82rem;font-weight:700}
+    .demo{border:1px dashed #a9bfd2;border-radius:16px;padding:17px;background:#fbfdff;margin:14px 0}
+    .demo h3{margin-top:0}
+    .demo label{display:block;font-weight:700;font-size:.92rem;margin:9px 0 4px}
+    .demo input:not([type=checkbox]):not([type=radio]):not([type=color]):not([type=submit]):not([type=reset]),.demo select,.demo textarea{width:100%;max-width:100%;padding:10px 11px;border:1px solid #c9d5e2;border-radius:9px;background:white;font:inherit}
+    .demo input[type=color]{width:58px;height:42px;border:0;background:none;cursor:pointer}
+    .demo input[type=checkbox],.demo input[type=radio]{margin-left:7px;accent-color:var(--blue)}
+    .demo .choice{display:flex;align-items:center;gap:6px;margin:7px 0;font-weight:500}
+    .demo .choice input{width:auto}
+    .btn{display:inline-block;border:0;border-radius:10px;padding:10px 16px;margin:7px 5px 0 0;background:var(--navy);color:white;font:700 .92rem "Cairo",sans-serif;cursor:pointer}
+    .btn.secondary{background:#e8eef5;color:var(--navy)}
+    .btn.gold{background:var(--sun);color:#322600}
+    .result{padding:9px 12px;background:#eaf8f0;border:1px solid #bce4cc;border-radius:10px;color:#145b3c;font-size:.9rem;margin-top:10px}
+    .ltr{direction:ltr;text-align:left;unicode-bidi:plaintext}
+    .big-entity{font-size:1.35rem;background:#f4f7fa;padding:12px;border-radius:12px;direction:ltr;text-align:center}
+    .checklist{list-style:none;padding:0}.checklist li{padding:7px 0;border-bottom:1px solid var(--line)}
+    .checklist li::before{content:"✓";color:var(--green);font-weight:900;margin-left:9px}
+    footer{text-align:center;padding:30px 12px;color:var(--muted);font-size:.9rem}
+    @media(max-width:850px){.hero{grid-template-columns:1fr}.layout{grid-template-columns:1fr}aside{position:static}aside .toc{columns:2}.stats{grid-template-columns:repeat(2,1fr)}nav{display:none}}
+    @media(max-width:480px){.hero{padding-top:35px}.stats{gap:8px}.stat{padding:10px}.stat span{font-size:.72rem}aside .toc{columns:1}section.lesson{padding:17px}h2{font-size:1.3rem}}
+    @media print{header,aside,.copy,.btn{display:none!important}.hero{padding:15px 0}.layout{display:block}.lesson{box-shadow:none!important;break-inside:avoid}.hero-card{background:#fff;color:#111;border:1px solid #aaa}.hero-card pre{color:#111}body{background:#fff}}
+  </style>
+</head>
+<body>
+<header>
+  <div class="container nav">
+    <div class="brand"><div class="logo">☀</div><div>Sunshine T Academy<small>بنحوّل الحلم لكود</small></div></div>
+    <nav>
+      <a href="#forms">Forms</a><a href="#attributes">Attributes</a><a href="#select">Select</a><a href="#network">Network</a><a href="#text-tags">Text Tags</a>
+    </nav>
+  </div>
+</header>
+
+<div class="container">
+  <section class="hero">
+    <div>
+      <div class="eyebrow">Front-End • HTML5 • استكمال المحاضرة السابقة</div>
+      <h1>محاضرة استكمال <span>HTML</span></h1>
+      <p>نكمل من حيث توقفنا: أنواع إضافية من <bdi>input</bdi>، وبناء النماذج باستخدام <bdi>form</bdi>، وفهم <bdi>action</bdi> و<bdi>method</bdi>، وكيف نرى البيانات في تبويب Network، وبعدها عناصر النصوص والرموز الخاصة.</p>
+      <p><b>هدف المحاضرة:</b> الطالب يعرف يبني Form عملي، يفهم ما الذي يُرسل فعلًا إلى السيرفر، ويقرأ طلب النموذج من أدوات المطور في المتصفح.</p>
+    </div>
+    <div class="hero-card">
+      <div class="dots"><i></i><i></i><i></i></div>
+      <pre><span class="cyan">&lt;form</span> <span class="pink">action</span>=<span class="yellow">"/register"</span>
+      <span class="pink">method</span>=<span class="yellow">"get"</span><span class="cyan">&gt;</span>
+  <span class="cyan">&lt;label</span> <span class="pink">for</span>=<span class="yellow">"name"</span><span class="cyan">&gt;</span>Name<span class="cyan">&lt;/label&gt;</span>
+  <span class="cyan">&lt;input</span> <span class="pink">id</span>=<span class="yellow">"name"</span>
+    <span class="pink">name</span>=<span class="yellow">"studentName"</span>
+    <span class="pink">required</span><span class="cyan">&gt;</span>
+  <span class="cyan">&lt;button</span> <span class="pink">type</span>=<span class="yellow">"submit"</span><span class="cyan">&gt;</span>
+    Send
+  <span class="cyan">&lt;/button&gt;</span>
+<span class="cyan">&lt;/form&gt;</span></pre>
+    </div>
+  </section>
+
+  <div class="stats">
+    <div class="stat"><strong>4 محاور</strong><span>Forms • Attributes • Network • Text</span></div>
+    <div class="stat"><strong>أمثلة حية</strong><span>جرّب التفاعل بنفسك</span></div>
+    <div class="stat"><strong>DevTools</strong><span>فهم البيانات المرسلة</span></div>
+    <div class="stat"><strong>تطبيق نهائي</strong><span>نموذج تسجيل طالب</span></div>
+  </div>
+
+  <div class="layout">
+    <aside>
+      <h3>محتويات المحاضرة</h3>
+      <div class="toc">
+        <a href="#recap">0. مراجعة سريعة</a>
+        <a href="#forms">1. form وaction وmethod</a>
+        <a href="#inputs">2. أنواع input الجديدة</a>
+        <a href="#attributes">3. خصائص المدخلات</a>
+        <a href="#choices">4. Radio وCheckbox وMultiple</a>
+        <a href="#select">5. Select وOption وOptgroup</a>
+        <a href="#datalist">6. List وDatalist</a>
+        <a href="#network">7. Network وQuery String</a>
+        <a href="#entities">8. الرموز &lt; و&gt; وغيرها</a>
+        <a href="#code-pre">9. code وpre</a>
+        <a href="#text-tags">10. q وwbr وbdi</a>
+        <a href="#final-project">11. التطبيق النهائي</a>
+        <a href="#quiz">12. أسئلة وواجب</a>
+      </div>
+    </aside>
+
+    <main>
+      <section class="lesson" id="recap">
+        <h2>0) مراجعة سريعة من المحاضرة السابقة</h2>
+        <p>المحاضرة السابقة تناولت <bdi>input</bdi> من الأنواع <bdi>text</bdi> و<bdi>password</bdi> و<bdi>email</bdi>، وكذلك عنصر <bdi>textarea</bdi>. النهارده هنوسّع معرفتنا بالنماذج.</p>
+        <div class="codebox"><div class="label">تذكير سريع <span>HTML</span></div><pre><code>&lt;label for="email"&gt;البريد الإلكتروني&lt;/label&gt;
+&lt;input type="email" id="email" name="email" required&gt;
+
+&lt;label for="message"&gt;رسالتك&lt;/label&gt;
+&lt;textarea id="message" name="message" rows="4"&gt;&lt;/textarea&gt;</code></pre></div>
+        <div class="note"><b>معلومة مهمة:</b> الـ <code>label</code> يوضح للمستخدم معنى الحقل. والربط باستخدام <code>for</code> مع <code>id</code> يخلي الضغط على اسم الحقل يركز المؤشر داخل المدخل.</div>
+      </section>
+
+      <section class="lesson" id="forms">
+        <h2>1) عنصر form والخصائص action وmethod</h2>
+        <p>عنصر <code>&lt;form&gt;</code> هو الحاوية التي تجمع الحقول والأزرار التي نريد إرسال بياناتها معًا.</p>
+        <h3>أولًا: action</h3>
+        <p>الخاصية <code>action</code> تحدد عنوان الصفحة أو المسار الذي سيستقبل بيانات النموذج عند الإرسال. في موقع حقيقي، يجب أن يكون هناك مسار أو برنامج يستقبل الطلب ويعالج البيانات. كتابة <code>action="#"</code> هنا للتجربة فقط وليست نظام تسجيل حقيقيًا.</p>
+        <h3>ثانيًا: method</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th>القيمة</th><th>المعنى</th><th>متى نستخدمها؟</th></tr></thead>
+          <tbody>
+            <tr><td><code>get</code></td><td>تُضاف القيم عادةً إلى عنوان الصفحة في صورة Query String.</td><td>بحث، فلترة، بيانات غير حساسة نريد أن يكون لها رابط قابل للمشاركة.</td></tr>
+            <tr><td><code>post</code></td><td>تُرسل القيم داخل جسم الطلب (Request Body)، لا داخل عنوان الصفحة عادةً.</td><td>إرسال نماذج التسجيل أو البيانات التي تُنشئ/تغيّر شيئًا على السيرفر، ورفع الملفات.</td></tr>
+          </tbody>
+        </table></div>
+        <div class="warning"><b>تنبيه:</b> <code>GET</code> لا يجعل البيانات سرية، و<code>POST</code> وحده لا يشفّرها. استخدم HTTPS، ولا ترسل كلمات المرور في رابط. كذلك التحقق من HTML مفيد لتجربة المستخدم، لكن السيرفر يجب أن يتحقق من البيانات بنفسه.</div>
+        <div class="codebox"><div class="label">مثال أساسي <span>form</span></div><pre><code>&lt;form action="/search" method="get"&gt;
+  &lt;label for="q"&gt;ابحث عن كورس&lt;/label&gt;
+  &lt;input type="search" id="q" name="q"&gt;
+  &lt;button type="submit"&gt;بحث&lt;/button&gt;
+&lt;/form&gt;</code></pre></div>
+        <p>إذا كتبت مثلًا <code>Python Kids</code> وضغطت بحث، قد يصبح الرابط بالشكل التالي:</p>
+        <div class="big-entity">/search?q=Python+Kids</div>
+        <p>المتصفح يرمّز المسافات والرموز الخاصة في الرابط. التفاصيل قد تختلف حسب طريقة الترميز.</p>
+      </section>
+
+      <section class="lesson" id="inputs">
+        <h2>2) أنواع input الجديدة</h2>
+        <p>نحدد نوع الحقل عن طريق <code>type</code>. اختيار النوع المناسب يغيّر شكل الحقل، لوحة المفاتيح على الموبايل، وبعض قواعد التحقق.</p>
+
+        <h3>2.1 — color</h3>
+        <p>يعرض أداة لاختيار لون، وتكون قيمة الحقل عادةً كود لون مثل <code>#ffcc00</code>.</p>
+        <div class="demo">
+          <label for="demo-color">اختار لونك</label>
+          <input id="demo-color" type="color" name="favoriteColor" value="#ffc928">
+          <div class="result" id="color-result">القيمة الحالية: #ffc928</div>
+        </div>
+        <div class="codebox"><div class="label">الكود <span>type=color</span></div><pre><code>&lt;input type="color" name="favoriteColor" value="#ffc928"&gt;</code></pre></div>
+
+        <h3>2.2 — file</h3>
+        <p>يسمح للمستخدم باختيار ملف من جهازه. الخاصية <code>accept</code> تساعد في تحديد أنواع الملفات المقترحة، لكنها ليست وسيلة حماية؛ يجب التحقق من الملف على السيرفر.</p>
+        <div class="demo">
+          <label for="demo-file">اختار صورة للتجربة</label>
+          <input id="demo-file" type="file" name="profileImage" accept="image/*">
+          <p class="result" id="file-result">لم يتم اختيار ملف.</p>
+        </div>
+        <div class="codebox"><div class="label">الكود <span>type=file</span></div><pre><code>&lt;form action="/upload" method="post" enctype="multipart/form-data"&gt;
+  &lt;label for="photo"&gt;الصورة&lt;/label&gt;
+  &lt;input type="file" id="photo" name="photo" accept="image/*" required&gt;
+  &lt;button type="submit"&gt;رفع الملف&lt;/button&gt;
+&lt;/form&gt;</code></pre></div>
+        <div class="note">رفع الملفات يحتاج عادةً <code>method="post"</code> و<code>enctype="multipart/form-data"</code>، بالإضافة إلى وجود مسار على السيرفر يعالج الملف.</div>
+
+        <h3>2.3 — search</h3>
+        <p>حقل مخصص للبحث. شكله قريب من <code>text</code>، وقد يضيف المتصفح زر مسح أو سلوكًا مناسبًا للبحث.</p>
+        <div class="demo">
+          <label for="demo-search">ابحث عن كورس</label>
+          <input id="demo-search" type="search" name="courseSearch" placeholder="مثال: Python">
+        </div>
+        <div class="codebox"><div class="label">الكود <span>type=search</span></div><pre><code>&lt;input type="search" name="courseSearch" placeholder="ابحث عن كورس"&gt;</code></pre></div>
+
+        <h3>2.4 — url</h3>
+        <p>مخصص لإدخال رابط، ويستطيع المتصفح التحقق من أن القيمة تبدو كرابط صالح وفق قواعد النوع. لكنه لا يضمن أن الموقع موجود أو آمن.</p>
+        <div class="demo">
+          <label for="demo-url">رابط موقعك</label>
+          <input id="demo-url" type="url" name="portfolio" placeholder="https://example.com">
+        </div>
+        <div class="codebox"><div class="label">الكود <span>type=url</span></div><pre><code>&lt;input type="url" name="portfolio" placeholder="https://example.com"&gt;</code></pre></div>
+
+        <h3>2.5 — month وtime</h3>
+        <p><code>month</code> لاختيار شهر وسنة، و<code>time</code> لاختيار وقت. شكل أداة الاختيار يختلف حسب المتصفح ونظام التشغيل.</p>
+        <div class="demo">
+          <label for="demo-month">الشهر المناسب</label><input id="demo-month" type="month" name="preferredMonth">
+          <label for="demo-time">وقت المحاضرة</label><input id="demo-time" type="time" name="lessonTime">
+        </div>
+        <div class="codebox"><div class="label">الكود <span>month / time</span></div><pre><code>&lt;label for="month"&gt;الشهر&lt;/label&gt;
+&lt;input type="month" id="month" name="month"&gt;
+
+&lt;label for="time"&gt;الوقت&lt;/label&gt;
+&lt;input type="time" id="time" name="time"&gt;</code></pre></div>
+
+        <h3>2.6 — submit وreset، والفرق بين input وbutton</h3>
+        <p>النوع <code>submit</code> يرسل النموذج. أما <code>reset</code> فيعيد عناصر النموذج إلى قيمها الافتراضية التي كانت موجودة في HTML عند تحميل الصفحة؛ لا يعني أنه يمسح قاعدة بيانات.</p>
+        <div class="demo">
+          <form action="#forms" method="get">
+            <label for="reset-name">اسم تجريبي</label><input id="reset-name" type="text" name="resetName" value="طالب Sunshine">
+            <label for="reset-color">لون تجريبي</label><input id="reset-color" type="color" name="resetColor" value="#1769aa">
+            <input class="btn gold" type="submit" value="إرسال النموذج">
+            <input class="btn secondary" type="reset" value="إعادة ضبط">
+            <button class="btn" type="button" onclick="document.getElementById('button-demo-result').textContent='ده زر button عادي؛ لا يرسل النموذج لأن type=button.'">زر عادي للتجربة</button>
+            <p class="result" id="button-demo-result">جرّب الأزرار ولاحظ الفرق.</p>
+          </form>
+        </div>
+        <div class="codebox"><div class="label">ثلاثة أنواع للأزرار <span>button types</span></div><pre><code>&lt;input type="submit" value="إرسال"&gt;
+&lt;input type="reset" value="إعادة ضبط"&gt;
+
+&lt;button type="button"&gt;زر عادي لا يرسل النموذج&lt;/button&gt;
+&lt;button type="submit"&gt;إرسال النموذج&lt;/button&gt;
+&lt;button type="reset"&gt;إعادة ضبط النموذج&lt;/button&gt;</code></pre></div>
+        <div class="warning">اكتب <code>type</code> صراحةً داخل <code>button</code>. الزر الموجود داخل form إذا لم تحدد نوعه قد يتصرف كزر إرسال.</div>
+      </section>
+
+      <section class="lesson" id="attributes">
+        <h2>3) خصائص input المهمة: name وvalue وhidden وmin وmax وstep وrequired</h2>
+        <h3>3.1 — name: الاسم الذي تُرسل به البيانات</h3>
+        <p>الخاصية <code>name</code> مهمة جدًا؛ غالبًا هي المفتاح الذي يربط القيمة باسمها عند إرسال النموذج. الحقل الذي لا يملك <code>name</code> لا يُرسل عادةً ضمن بيانات النموذج.</p>
+        <div class="codebox"><div class="label">id وname مش نفس الوظيفة <span>مهم</span></div><pre><code>&lt;input id="student-email" name="email" type="email"&gt;</code></pre></div>
+        <ul>
+          <li><code>id</code>: لتعريف العنصر داخل الصفحة، وربطه بالـ <code>label</code> أو استهدافه من CSS وJavaScript.</li>
+          <li><code>name</code>: اسم الحقل ضمن البيانات المرسلة.</li>
+          <li><code>value</code>: القيمة الحالية أو الافتراضية للحقل حسب نوعه.</li>
+        </ul>
+
+        <h3>3.2 — value: القيمة التي تُرسل، مش بالضرورة النص الظاهر</h3>
+        <p>في حقل النص، القيمة هي النص المكتوب. في أزرار الاختيار و<select> قد يكون النص المعروض للمستخدم مختلفًا عن القيمة المرسلة. لو لم تحدد <code>value</code> في بعض أنواع الحقول، فقد تكون القيمة المرسلة مختلفة عن المتوقع.</p>
+        <div class="codebox"><div class="label">مثال <span>value</span></div><pre><code>&lt;input type="text" name="studentName" value="Ali"&gt;
+&lt;input type="hidden" name="courseId" value="PY101"&gt;</code></pre></div>
+
+        <h3>3.3 — hidden: حقل مخفي عن العرض</h3>
+        <p>الحقل المخفي لا يظهر للمستخدم كحقل عادي، لكنه قد يُرسل مع النموذج إذا كان لديه <code>name</code> وكان ضمن النموذج. لا تستخدمه لتخزين أسرار أو صلاحيات؛ المستخدم يستطيع رؤية قيمته وتعديلها من أدوات المطور.</p>
+        <div class="codebox"><div class="label">مثال <span>type=hidden</span></div><pre><code>&lt;input type="hidden" name="formVersion" value="v1"&gt;</code></pre></div>
+
+        <h3>3.4 — min وmax وstep</h3>
+        <p>تُستخدم غالبًا مع المدخلات الرقمية والتاريخ والوقت:</p>
+        <ul>
+          <li><code>min</code>: أقل قيمة مسموحة.</li>
+          <li><code>max</code>: أعلى قيمة مسموحة.</li>
+          <li><code>step</code>: مقدار الزيادة المسموح بها بين القيم.</li>
+        </ul>
+        <div class="demo">
+          <label for="demo-age">العمر (من 7 إلى 18)</label>
+          <input id="demo-age" type="number" name="ageDemo" min="7" max="18" step="1" value="12">
+          <label for="demo-hours">عدد ساعات التدريب (كل نصف ساعة)</label>
+          <input id="demo-hours" type="number" name="hoursDemo" min="0.5" max="5" step="0.5" value="1">
+          <p class="note">جرّب إدخال عمر 25 أو قيمة مثل 1.3 في ساعات التدريب، ثم أرسل نموذجًا يحتوي على الحقل لتلاحظ التحقق.</p>
+        </div>
+        <div class="codebox"><div class="label">مثال <span>min / max / step</span></div><pre><code>&lt;input type="number" name="age" min="7" max="18" step="1"&gt;
+&lt;input type="number" name="hours" min="0.5" max="5" step="0.5"&gt;</code></pre></div>
+
+        <h3>3.5 — maxlength وminlength (غالبًا المقصود max length وmin length)</h3>
+        <p>تحدد <code>minlength</code> أقل عدد من الحروف، و<code>maxlength</code> أقصى عدد منها. تُستخدم عادةً مع حقول النصوص. أما <code>min</code> و<code>max</code> فهما للحدود الرقمية أو الزمنية وغيرها حسب نوع الحقل.</p>
+        <div class="codebox"><div class="label">مثال <span>length limits</span></div><pre><code>&lt;input type="text" name="username"
+       minlength="3" maxlength="20" required&gt;</code></pre></div>
+
+        <h3>3.6 — required</h3>
+        <p>تجعل الحقل مطلوبًا قبل الإرسال، وفق قواعد التحقق في المتصفح. مثلًا، <code>required</code> مع <code>email</code> يتطلب وجود قيمة بصيغة بريد إلكتروني مقبولة.</p>
+        <div class="codebox"><div class="label">مثال <span>required</span></div><pre><code>&lt;input type="email" name="email" required&gt;</code></pre></div>
+
+        <h3>3.7 — novalidate</h3>
+        <p>عند وضع <code>novalidate</code> على عنصر <code>form</code>، يتجاوز المتصفح التحقق التلقائي المعتاد عند الإرسال. هذا لا يجعل البيانات صحيحة؛ يجب أن يظل السيرفر مسؤولًا عن التحقق.</p>
+        <div class="codebox"><div class="label">مثال <span>novalidate</span></div><pre><code>&lt;form action="#" method="get" novalidate&gt;
+  &lt;input type="email" name="email" required&gt;
+  &lt;button type="submit"&gt;إرسال دون تحقق المتصفح&lt;/button&gt;
+&lt;/form&gt;</code></pre></div>
+      </section>
+
+      <section class="lesson" id="choices">
+        <h2>4) Radio وCheckbox وخصيصة multiple</h2>
+        <h3>Radio: اختيار واحد من مجموعة</h3>
+        <p>عشان تعمل مجموعة radio، خلي عناصر الاختيار التي تنتمي لنفس السؤال تشترك في قيمة <code>name</code>. المستخدم يختار اختيارًا واحدًا من المجموعة.</p>
+        <div class="demo">
+          <p><b>اختار نظام الدراسة:</b></p>
+          <label class="choice"><input type="radio" name="studyModeDemo" value="online" checked> أونلاين</label>
+          <label class="choice"><input type="radio" name="studyModeDemo" value="onsite"> حضوري</label>
+          <label class="choice"><input type="radio" name="studyModeDemo" value="hybrid"> هجين</label>
+        </div>
+        <div class="codebox"><div class="label">مثال <span>radio</span></div><pre><code>&lt;label&gt;&lt;input type="radio" name="studyMode" value="online"&gt; أونلاين&lt;/label&gt;
+&lt;label&gt;&lt;input type="radio" name="studyMode" value="onsite"&gt; حضوري&lt;/label&gt;</code></pre></div>
+        <h3>Checkbox: اختيار صفر أو أكثر</h3>
+        <p>كل مربع اختيار مستقل. إذا أردت إرسال عدة قيم لنفس الاسم، يمكن استخدام اسم ينتهي بـ <code>[]</code> في كثير من التطبيقات الخلفية، لكن طريقة استقبال القيم تعتمد على التقنية المستخدمة في السيرفر.</p>
+        <div class="demo">
+          <p><b>اختار التقنيات التي تهمك:</b></p>
+          <label class="choice"><input type="checkbox" name="interestDemo" value="python"> Python</label>
+          <label class="choice"><input type="checkbox" name="interestDemo" value="web"> Web</label>
+          <label class="choice"><input type="checkbox" name="interestDemo" value="robotics"> Robotics</label>
+        </div>
+        <h3>multiple: السماح باختيار أكثر من قيمة</h3>
+        <p>تُستخدم <code>multiple</code> مع <code>select</code> للسماح باختيار عدة خيارات، ومع <code>input type="file"</code> للسماح باختيار عدة ملفات.</p>
+        <div class="codebox"><div class="label">أمثلة <span>multiple</span></div><pre><code>&lt;select name="courses" multiple&gt;
+  &lt;option value="python"&gt;Python&lt;/option&gt;
+  &lt;option value="web"&gt;Web&lt;/option&gt;
+&lt;/select&gt;
+
+&lt;input type="file" name="files" multiple&gt;</code></pre></div>
+        <div class="note">في المتصفح، اختيار أكثر من عنصر في القائمة قد يحتاج Ctrl أو Command أو طريقة اختيار متعددة حسب الجهاز. وجود <code>multiple</code> لا يعني أن المستخدم اختار بالفعل أكثر من قيمة.</div>
+      </section>
+
+      <section class="lesson" id="select">
+        <h2>5) select وoption وoptgroup والاختيار الافتراضي</h2>
+        <ul>
+          <li><code>select</code>: ينشئ قائمة اختيارات.</li>
+          <li><code>option</code>: يمثل اختيارًا داخل القائمة.</li>
+          <li><code>optgroup</code>: يجمع الاختيارات تحت عنوان فئة.</li>
+          <li><code>value</code>: القيمة التي تُرسل عند اختيار هذا الخيار.</li>
+          <li><code>selected</code>: تجعل خيارًا محددًا افتراضيًا.</li>
+        </ul>
+        <div class="demo">
+          <label for="demo-course">اختار كورس (لاحظ أن قيمة الإرسال ليست بالضرورة النص الظاهر)</label>
+          <select id="demo-course" name="courseDemo">
+            <option value="">-- اختار كورس --</option>
+            <optgroup label="Programming">
+              <option value="scratch">Scratch للمبتدئين</option>
+              <option value="python" selected>Python Programming</option>
+            </optgroup>
+            <optgroup label="Web Development">
+              <option value="html-css">HTML &amp; CSS</option>
+              <option value="javascript">JavaScript</option>
+            </optgroup>
+          </select>
+          <p class="result" id="select-result">قيمة الاختيار الحالي: python</p>
+        </div>
+        <div class="codebox"><div class="label">مثال <span>select / option / optgroup</span></div><pre><code>&lt;label for="course"&gt;الكورس&lt;/label&gt;
+&lt;select id="course" name="course"&gt;
+  &lt;option value=""&gt;-- اختار كورس --&lt;/option&gt;
+  &lt;optgroup label="Programming"&gt;
+    &lt;option value="scratch"&gt;Scratch للمبتدئين&lt;/option&gt;
+    &lt;option value="python" selected&gt;Python Programming&lt;/option&gt;
+  &lt;/optgroup&gt;
+  &lt;optgroup label="Web"&gt;
+    &lt;option value="html-css"&gt;HTML &amp;amp; CSS&lt;/option&gt;
+  &lt;/optgroup&gt;
+&lt;/select&gt;</code></pre></div>
+        <div class="success"><b>ركز في الفرق:</b> المستخدم يرى <b>Python Programming</b>، لكن القيمة التي تُرسل هي <code>python</code> بسبب <code>value="python"</code>. إذا لم تكتب <code>value</code> في option، يكون النص الموجود داخله هو القيمة الافتراضية غالبًا.</div>
+        <h3>قائمة تسمح بأكثر من اختيار</h3>
+        <div class="demo">
+          <label for="multi-courses">اختار أكثر من كورس باستخدام Ctrl أو Command</label>
+          <select id="multi-courses" name="coursesMultiDemo" multiple size="4">
+            <option value="scratch">Scratch</option><option value="python">Python</option><option value="web">HTML &amp; CSS</option><option value="robotics">Robotics</option>
+          </select>
+        </div>
+      </section>
+
+      <section class="lesson" id="datalist">
+        <h2>6) list وdatalist: اقتراحات جاهزة مع إمكانية الكتابة</h2>
+        <p>الخاصية <code>list</code> في عنصر الإدخال تربطه بعنصر <code>datalist</code> له نفس قيمة <code>id</code>. المتصفح يعرض اقتراحات، لكن المستخدم يظل قادرًا عادةً على كتابة قيمة أخرى.</p>
+        <div class="demo">
+          <label for="demo-language">اكتب أو اختار لغة برمجة</label>
+          <input id="demo-language" type="text" name="language" list="languages-list" placeholder="ابدأ الكتابة...">
+          <datalist id="languages-list">
+            <option value="Python"></option>
+            <option value="JavaScript"></option>
+            <option value="C++"></option>
+            <option value="Scratch"></option>
+          </datalist>
+        </div>
+        <div class="codebox"><div class="label">مثال <span>list + datalist</span></div><pre><code>&lt;label for="language"&gt;لغة البرمجة&lt;/label&gt;
+&lt;input type="text" id="language" name="language" list="languages"&gt;
+
+&lt;datalist id="languages"&gt;
+  &lt;option value="Python"&gt;&lt;/option&gt;
+  &lt;option value="JavaScript"&gt;&lt;/option&gt;
+  &lt;option value="C++"&gt;&lt;/option&gt;
+&lt;/datalist&gt;</code></pre></div>
+        <div class="note">الفرق عن <code>select</code>: القائمة المنسدلة تختار من الخيارات المحددة، أما <code>datalist</code> فهي اقتراحات لحقل إدخال. إذا أردت منع القيم غير الموجودة، ستحتاج إلى تحقق إضافي.</div>
+      </section>
+
+      <section class="lesson" id="network">
+        <h2>7) من المتصفح: Inspect ثم Network ثم Query String Parameters</h2>
+        <p>دي خطوة عملية مهمة: هنشوف البيانات التي يرسلها النموذج بدل ما نعتمد على التخمين.</p>
+        <ol>
+          <li>افتح الصفحة في المتصفح على الكمبيوتر.</li>
+          <li>اضغط كليك يمين في الصفحة ثم <bdi>Inspect</bdi>، أو اضغط <code>F12</code>، أو <code>Ctrl + Shift + I</code>.</li>
+          <li>افتح تبويب <bdi>Network</bdi>.</li>
+          <li>فعّل <bdi>Preserve log</bdi> إن كان متاحًا، ثم أرسل النموذج التجريبي بالأسفل.</li>
+          <li>اختار الطلب الجديد الذي ظهر في القائمة، ثم افتح <bdi>Payload</bdi> أو <bdi>Headers</bdi> حسب المتصفح ونوع الطلب.</li>
+          <li>مع <code>GET</code>، ابحث عن <bdi>Query String Parameters</bdi>. مع <code>POST</code> قد تجد البيانات تحت <bdi>Form Data</bdi> أو <bdi>Request Payload</bdi>.</li>
+        </ol>
+        <div class="warning">قد تختلف أسماء التبويبات قليلًا بين Chrome وEdge وFirefox. وإذا لم يظهر طلب، تأكد أنك أرسلت النموذج فعلًا وأن <code>name</code> موجود للحقول.</div>
+        <h3>جرّب نموذج GET</h3>
+        <p>النموذج التالي يرسل إلى الصفحة نفسها باستخدام GET، حتى تقدر تلاحظ تغيّر الرابط وبيانات الطلب. لا تدخل أي بيانات شخصية أو كلمات مرور في التجربة.</p>
+        <div class="demo">
+          <form action="#network" method="get" id="network-demo-form">
+            <label for="net-name">الاسم التجريبي</label><input id="net-name" type="text" name="studentName" value="Sara" required>
+            <label for="net-search">الكورس المطلوب</label><input id="net-search" type="search" name="course" value="Python">
+            <label for="net-level">المستوى</label>
+            <select id="net-level" name="level">
+              <option value="beginner">مبتدئ</option><option value="intermediate" selected>متوسط</option><option value="advanced">متقدم</option>
+            </select>
+            <p><b>نوع الدراسة:</b></p>
+            <label class="choice"><input type="radio" name="studyMode" value="online" checked> أونلاين</label>
+            <label class="choice"><input type="radio" name="studyMode" value="onsite"> حضوري</label>
+            <input type="hidden" name="formVersion" value="lesson-demo-v1">
+            <button class="btn gold" type="submit">إرسال وملاحظة Network</button>
+            <button class="btn secondary" type="reset">Reset</button>
+          </form>
+          <p class="result">بعد الإرسال، ابحث في Network عن أسماء مثل <code>studentName</code> و<code>course</code> و<code>level</code> و<code>studyMode</code> و<code>formVersion</code>.</p>
+        </div>
+        <h3>إيه اللي بيتبعت وإيه اللي مش بيتبعت؟</h3>
+        <ul>
+          <li>الحقل يحتاج عادةً إلى <code>name</code> حتى يدخل ضمن بيانات النموذج.</li>
+          <li>الـ <code>value</code> هي القيمة المرسلة؛ النص الظاهر للمستخدم قد يكون مختلفًا.</li>
+          <li>الـ radio غير المختار لا يُرسل. والـ checkbox غير المحدد لا يُرسل.</li>
+          <li>الحقول المعطلة <code>disabled</code> لا تُرسل عادةً. أما <code>readonly</code> فيختلف عنها ويُرسل إذا كان له اسم.</li>
+          <li>حقل <code>hidden</code> يمكن إرساله رغم أنه غير ظاهر.</li>
+          <li>رفع الملفات يحتاج نموذجًا بإعدادات مناسبة وطريقة POST غالبًا.</li>
+        </ul>
+        <div class="codebox"><div class="label">شكل Query String تقريبي <span>GET</span></div><pre><code>?studentName=Sara&amp;course=Python&amp;level=intermediate&amp;studyMode=online&amp;formVersion=lesson-demo-v1</code></pre></div>
+        <p>لاحظ أن هذا المثال توضيحي؛ المسافات والرموز قد يتم ترميزها. لا تعتبر البيانات الموجودة في الرابط سرية، لأنها قد تظهر في سجل المتصفح أو السجلات الأخرى.</p>
+      </section>
+
+      <section class="lesson" id="entities">
+        <h2>8) الرموز الخاصة في HTML: &lt; و&gt; و&amp; وغيرها</h2>
+        <p>بعض الرموز لها معنى خاص داخل HTML. مثلًا <code>&lt;</code> تبدأ وسمًا، و<code>&gt;</code> تنهي اسم الوسم. لو أردنا عرض الرمز نفسه كنص، نستخدم HTML Entities.</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th>الرمز الذي نريد عرضه</th><th>الكتابة في HTML</th><th>الاستخدام</th></tr></thead>
+          <tbody>
+            <tr><td class="ltr">&lt;</td><td><code>&amp;lt;</code></td><td>أصغر من / بداية وسم عند استخدامه في الكود</td></tr>
+            <tr><td class="ltr">&gt;</td><td><code>&amp;gt;</code></td><td>أكبر من / نهاية وسم عند استخدامه في الكود</td></tr>
+            <tr><td class="ltr">&amp;</td><td><code>&amp;amp;</code></td><td>علامة &amp;</td></tr>
+            <tr><td class="ltr">"</td><td><code>&amp;quot;</code></td><td>علامة الاقتباس المزدوجة</td></tr>
+            <tr><td class="ltr">'</td><td><code>&amp;apos;</code> أو <code>&amp;#39;</code></td><td>علامة الاقتباس المفردة</td></tr>
+            <tr><td>مسافة غير قابلة للكسر</td><td><code>&amp;nbsp;</code></td><td>مسافة لا ينقسم السطر عندها عادةً</td></tr>
+            <tr><td>علامة ©</td><td><code>&amp;copy;</code></td><td>حقوق النشر</td></tr>
+          </tbody>
+        </table></div>
+        <div class="codebox"><div class="label">مثال <span>عرض كود HTML كنص</span></div><pre><code>&lt;p&gt;اكتب: &amp;lt;h1&amp;gt;Hello&amp;lt;/h1&amp;gt;&lt;/p&gt;</code></pre></div>
+        <p>الناتج الظاهر للمستخدم سيكون: <bdi>&lt;h1&gt;Hello&lt;/h1&gt;</bdi></p>
+        <div class="note">تقدر تستخدم الرموز المسماة أو الرموز الرقمية. والأهم: لو هتعرض كودًا كمثال داخل الصفحة، لازم تتعامل مع علامات أصغر من وأكبر من بطريقة تمنع المتصفح من تفسيرها كوسوم حقيقية.</div>
+      </section>
+
+      <section class="lesson" id="code-pre">
+        <h2>9) عنصرَا code وpre</h2>
+        <h3>code</h3>
+        <p><code>&lt;code&gt;</code> يوضح أن المحتوى عبارة عن كود برمجي أو تعبير تقني. هو عنصر inline في الوضع الافتراضي؛ يعني لا يبدأ سطرًا جديدًا وحده.</p>
+        <h3>pre</h3>
+        <p><code>&lt;pre&gt;</code> يعرض المسافات والأسطر كما كُتبت تقريبًا، لذلك يناسب عرض أمثلة الكود متعددة الأسطر. غالبًا نضع <code>code</code> داخل <code>pre</code> عند عرض كتلة كود.</p>
+        <div class="codebox"><div class="label">مثال <span>pre + code</span></div><pre><code>&lt;pre&gt;
+  &lt;code&gt;
+    let score = 10;
+    if (score &gt; 5) {
+      console.log("Great!");
+    }
+  &lt;/code&gt;
+&lt;/pre&gt;</code></pre></div>
+        <div class="success">قاعدة سهلة: <code>code</code> يحدد أن النص كود، و<code>pre</code> يحافظ على تنسيق الأسطر والمسافات. التنسيق اللوني للكود يحتاج CSS أو أداة إضافية، وليس وظيفة تلقائية لـ <code>code</code>.</div>
+      </section>
+
+      <section class="lesson" id="text-tags">
+        <h2>10) عناصر نصية مفيدة: q وwbr وbdi</h2>
+        <h3>10.1 — q: اقتباس قصير داخل السطر</h3>
+        <p>عنصر <code>&lt;q&gt;</code> يُستخدم للاقتباس القصير داخل فقرة، والمتصفح قد يضيف علامات اقتباس تلقائيًا.</p>
+        <div class="codebox"><div class="label">مثال <span>q</span></div><pre><code>&lt;p&gt;شعارنا هو &lt;q&gt;بنحوّل الحلم لكود&lt;/q&gt;.&lt;/p&gt;</code></pre></div>
+        <div class="demo"><p>شعار الأكاديمية: <q>بنحوّل الحلم لكود</q>.</p></div>
+
+        <h3>10.2 — wbr: مكان محتمل لكسر السطر</h3>
+        <p>عنصر <code>&lt;wbr&gt;</code> يحدد نقطة يمكن للمتصفح أن يكسر عندها السطر إذا احتاج، مثل الروابط أو الكلمات الطويلة. لا يحذف أي جزء من الرابط ولا يقصره؛ هو فقط يساعد في التفاف السطر بصريًا.</p>
+        <div class="codebox"><div class="label">مثال <span>wbr</span></div><pre><code>&lt;p&gt;
+  https://example.com/very-long-section&lt;wbr&gt;/student-registration&lt;wbr&gt;/frontend
+&lt;/p&gt;</code></pre></div>
+        <div class="demo"><p class="ltr">https://example.com/very-long-section<wbr>/student-registration<wbr>/frontend</p></div>
+
+        <h3>10.3 — bdi: عزل اتجاه النص</h3>
+        <p>الصفحة هنا عربية واتجاهها من اليمين لليسار. عند إدخال نص بلغة أو اتجاه مختلف، مثل اسم مستخدم إنجليزي أو رابط، قد يختلط ترتيب علامات الترقيم. عنصر <code>&lt;bdi&gt;</code> يعزل اتجاه النص الداخلي عن اتجاه النص المحيط.</p>
+        <div class="codebox"><div class="label">مثال <span>bdi</span></div><pre><code>&lt;p&gt;اسم الطالب: &lt;bdi&gt;Moheb_123&lt;/bdi&gt;&lt;/p&gt;
+&lt;p&gt;الكورس: &lt;bdi&gt;HTML &amp;amp; CSS&lt;/bdi&gt;&lt;/p&gt;</code></pre></div>
+        <div class="demo"><p>اسم الطالب: <bdi>Moheb_123</bdi></p><p>الكورس: <bdi>HTML &amp; CSS</bdi></p></div>
+      </section>
+
+      <section class="lesson" id="final-project">
+        <h2>11) التطبيق النهائي: نموذج تسجيل طالب في Sunshine T Academy</h2>
+        <p>المثال يجمع أهم المفاهيم التي درسناها. هذا نموذج تعليمي يعمل داخل المتصفح، لكنه لا يسجل البيانات في قاعدة بيانات فعلية لأنه لا يوجد Backend مرتبط به.</p>
+        <div class="demo">
+          <form action="#final-project" method="get" id="student-form">
+            <label for="student-name">اسم الطالب *</label>
+            <input id="student-name" type="text" name="studentName" minlength="3" maxlength="40" required placeholder="اكتب الاسم">
+            <label for="student-email">البريد الإلكتروني *</label>
+            <input id="student-email" type="email" name="email" required placeholder="name@example.com">
+            <label for="student-age">العمر *</label>
+            <input id="student-age" type="number" name="age" min="7" max="18" step="1" required value="12">
+            <label for="student-month">شهر بدء الدراسة</label>
+            <input id="student-month" type="month" name="startMonth">
+            <label for="student-time">الوقت المفضل</label>
+            <input id="student-time" type="time" name="preferredTime">
+            <label for="student-color">لونك المفضل</label>
+            <input id="student-color" type="color" name="favoriteColor" value="#ffc928">
+            <label for="student-course">الكورس *</label>
+            <select id="student-course" name="course" required>
+              <option value="">-- اختار كورس --</option>
+              <option value="scratch">Scratch</option>
+              <option value="python">Python</option>
+              <option value="html-css">HTML &amp; CSS</option>
+              <option value="robotics">Arduino &amp; Robotics</option>
+            </select>
+            <p><b>طريقة الدراسة *</b></p>
+            <label class="choice"><input type="radio" name="studyMode" value="online" required> أونلاين</label>
+            <label class="choice"><input type="radio" name="studyMode" value="onsite"> حضوري</label>
+            <p><b>الموضوعات المهتم بها</b></p>
+            <label class="choice"><input type="checkbox" name="interests" value="games"> صناعة الألعاب</label>
+            <label class="choice"><input type="checkbox" name="interests" value="web"> تصميم المواقع</label>
+            <label class="choice"><input type="checkbox" name="interests" value="robots"> الروبوتات</label>
+            <label for="student-notes">ملاحظات إضافية</label>
+            <textarea id="student-notes" name="notes" rows="3" maxlength="250" placeholder="اكتب ملاحظاتك هنا..."></textarea>
+            <input type="hidden" name="academy" value="Sunshine-T-Academy">
+            <button class="btn gold" type="submit">إرسال تجريبي (GET)</button>
+            <button class="btn secondary" type="reset">مسح المدخلات وإرجاع الافتراضي</button>
+          </form>
+        </div>
+        <div class="warning"><b>قبل استخدام النموذج في موقع حقيقي:</b> لا ترسل بيانات شخصية فعلية إلى هذا المثال. التسجيل الحقيقي يحتاج Backend، والتحقق من المدخلات على السيرفر، وسياسة خصوصية، وHTTPS.</div>
+        <h3>مراجعة سريعة للكود</h3>
+        <ul class="checklist">
+          <li><code>form</code> يجمع الحقول في نموذج واحد.</li>
+          <li><code>action</code> يحدد وجهة الإرسال.</li>
+          <li><code>method</code> يحدد طريقة إرسال البيانات.</li>
+          <li><code>name</code> يحدد اسم كل قيمة ضمن بيانات النموذج.</li>
+          <li><code>value</code> يحدد القيمة المرسلة أو القيمة الافتراضية.</li>
+          <li><code>required</code> و<code>min</code> و<code>max</code> و<code>step</code> تساعد في التحقق داخل المتصفح.</li>
+          <li><code>submit</code> يرسل، و<code>reset</code> يعيد القيم الافتراضية.</li>
+        </ul>
+      </section>
+
+      <section class="lesson" id="quiz">
+        <h2>12) أسئلة للمراجعة والواجب</h2>
+        <h3>أسئلة سريعة</h3>
+        <ol>
+          <li>ما الفرق بين <code>action</code> و<code>method</code>؟</li>
+          <li>لماذا نحتاج <code>name</code> حتى تظهر قيمة الحقل ضمن بيانات النموذج؟</li>
+          <li>ما الفرق بين <code>id</code> و<code>name</code>؟</li>
+          <li>ما الفرق بين <code>radio</code> و<code>checkbox</code>؟</li>
+          <li>ما الفرق بين <code>select</code> و<code>datalist</code>؟</li>
+          <li>لو كتبنا <code>&lt;option value="py"&gt;Python&lt;/option&gt;</code>، ما القيمة التي تُرسل؟</li>
+          <li>ما الفرق بين <code>min</code>/<code>max</code> و<code>minlength</code>/<code>maxlength</code>؟</li>
+          <li>أين نجد بيانات نموذج GET في DevTools؟ وما اسم القسم المتوقع؟</li>
+          <li>ما الفرق بين <code>code</code> و<code>pre</code>؟</li>
+          <li>هل <code>hidden</code> مكان آمن لتخزين كلمة مرور أو سر؟ ولماذا؟</li>
+        </ol>
+        <h3>الواجب العملي</h3>
+        <p>أنشئ ملفًا باسم <code>student-registration.html</code> يحتوي على نموذج تسجيل دورة برمجة، ويجب أن يتضمن:</p>
+        <ul>
+          <li>اسم الطالب، البريد الإلكتروني، العمر، شهر البدء والوقت المناسب.</li>
+          <li>اختيار لون، وحقل بحث، وحقل رابط Portfolio.</li>
+          <li>Radio لطريقة الدراسة، وCheckbox لاهتمامات الطالب.</li>
+          <li>Select يحتوي على Option وOptgroup وخيار افتراضي.</li>
+          <li>Datalist لاقتراحات لغات البرمجة.</li>
+          <li>خصائص name وvalue وrequired وmin وmax وstep وminlength وmaxlength.</li>
+          <li>زر Submit وزر Reset.</li>
+          <li>جرّب الإرسال باستخدام GET، وافتح Network، والتقط ملاحظة بأسماء Query String Parameters التي ظهرت.</li>
+          <li>أضف مثالًا يعرض كود HTML باستخدام Entities، ومثالًا لكل من code وpre وq وwbr وbdi.</li>
+        </ul>
+        <div class="success"><b>معيار نجاح الواجب:</b> النموذج منظم، كل حقل له Label واضح وName مناسب، وتقدر تشرح للمدرس ما الذي يُرسل إلى Network ولماذا.</div>
+      </section>
+    </main>
+  </div>
+</div>
+
+<footer>
+  <b>Sunshine T Academy</b> — بنحوّل الحلم لكود ☀<br>
+  محاضرة استكمال HTML • Front-End
+</footer>
+<script>
+  const colorInput = document.getElementById('demo-color');
+  colorInput.addEventListener('input', () => {
+    document.getElementById('color-result').textContent = 'القيمة الحالية: ' + colorInput.value;
+  });
+  const fileInput = document.getElementById('demo-file');
+  fileInput.addEventListener('change', () => {
+    const file = fileInput.files && fileInput.files[0];
+    document.getElementById('file-result').textContent = file ? 'الملف المختار: ' + file.name + ' (' + Math.round(file.size / 1024) + ' KB)' : 'لم يتم اختيار ملف.';
+  });
+  const courseSelect = document.getElementById('demo-course');
+  function showCourseValue() {
+    document.getElementById('select-result').textContent = 'قيمة الاختيار الحالي: ' + (courseSelect.value || '(قيمة فارغة)');
+  }
+  courseSelect.addEventListener('change', showCourseValue);
+  showCourseValue();
+</script>
+</body>
+</html>
